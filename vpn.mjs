@@ -19,6 +19,3 @@ async function toggleVPN() {
 }
 
 toggleVPN()
-
-//launchctl load ~/Library/LaunchAgents/com.vpn.daemon.plist
-//launchctl unload ~/Library/LaunchAgents/com.vpn.daemon.plist
