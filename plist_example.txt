@@ -21,6 +21,3 @@
     </array>
   </dict>
 </plist>
-
-
-NOTE: name your actual plist file to match the label
