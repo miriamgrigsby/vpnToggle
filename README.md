@@ -64,19 +64,23 @@ ToggleVpn() is where the magic happens to connect or disconnect after 110 sec of
 ### Notes about Debugging
 
 After running the following command, the program should be working:
+
     run launchctl load ~/Library/LaunchAgents/com.vpn.daemon.plist
 
 To check this, place a console.log("hello, world") in the node file and run the following command: 
+
     cat ~/vpn/stderr.log
 
 This command prints the error log if there is one. In my case, I have an error "The ESM module loader is experimental." This is just a warning. Because I imported exec in the node file, I needed to change the file type from .js to .mjs which denotes module and is experimental. If there are other errors, it will be very clear. 
 
 To see the actual console.log, run the following command: 
+
     cat ~/vpn/stdout.log
 
 This stdout.log should update every 5 sec (or whatever time interval is set in the .plist). So running the command every 5 secs should add another console.log to the list. 
 
-If you want to stop the whole process, which is needed as you're making changes to the node file, run the following command: 
+If you want to stop the whole process, which is needed as you're making changes to the node file, run the following command:
+
     launchctl unload ~/Library/LaunchAgents/com.vpn.daemon.plist
 
 NOTE: to run the load and unload, make sure the name of the .plist file matches the name of file you've created
