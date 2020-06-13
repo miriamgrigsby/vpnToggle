@@ -28,11 +28,13 @@ The .plist file:
     
     update all the routes in the plist file to be your username and the location of your executable file  
     
-    run launchctl load ~/Library/LaunchAgents/com.vpn.daemon.plist
+    run the following command to start:
+    
+        launchctl load ~/Library/LaunchAgents/com.vpn.daemon.plist
     
 ### Features
 
-The two main features of the app connecting and disconnecting the VPN connection. When the user logs into their computer, the VPN will connect. The program will check every 5 seconds for user input and disconnect after 110 sec of inactivity. Once the computer senses user input again, the VPN will automatically reconnect, preventing any freezing or delays.   
+The two main features of the app are connecting and disconnecting the VPN connection. When the user logs into their computer, the VPN will connect. The program will check every 5 seconds for user input and disconnect after 110 sec of inactivity. Once the computer senses user input again, the VPN will automatically reconnect, preventing any freezing or delays.   
 
 ### Operation Overview
 
@@ -40,7 +42,7 @@ In my case, my display is set to turn off after 2 minutes. I check my system eve
 
 ### .plist file
 
-This file is broken down into 3 main parts: Label, StartInterval, Program.
+This file is broken down into 2 required parts: Label and Program.
 
   -The Label is absolutely necessary and the name follows a strict naming convention and should directly match the name of your .plist file
   
@@ -57,7 +59,7 @@ This file is broken down into 3 main parts: Label, StartInterval, Program.
 
 ### Executable file
     
-The first func, sh, uses the exec import from child_process (https://nodejs.org/api/child_process.html#child_process_child_process) to execute the command passed in and to resolve the stdout and stderr.
+The first func, sh, uses the exec import from child_process to execute the command passed in and to resolve the stdout and stderr (https://nodejs.org/api/child_process.html#child_process_child_process) 
 
 ToggleVpn() is where the magic happens to connect or disconnect after 110 sec of inactivity. The first await passes a shell command to the sh(). This command checks the system for inactivity and sets that int = stdout. Now we can check the value of stdout to see if it is >= to my designated timeframe, if so, disconnect vpn, otherwise connect it. 
 
